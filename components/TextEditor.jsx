@@ -5,10 +5,8 @@ import React, { useState } from 'react';
 // import 'react-quill/dist/quill.Bubble.css';
 import dynamic from 'next/dynamic'
 
-const ReactQuill = dynamic(import('react-quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-})
+const ReactQuill = dynamic(async () => await import("react-quill"), { ssr: false })
+
 // var FontAttributor = Quill.import('attributors/class/font');
 // FontAttributor.whitelist = [
 //   'sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'
