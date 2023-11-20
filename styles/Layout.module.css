@@ -117,12 +117,11 @@ display: flex
   height: 35px;
   padding-right: 10px;
 }
-.socialMediaIcons :nth-child(n) img {
+.socialMediaIcons :nth-child(n) a img {
   border-radius: 15px;
   width: 35px;
   height: 35px;
   padding-right: 10px;
-  background-color: yellow;
 }
 
 
