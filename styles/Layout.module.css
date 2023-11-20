@@ -108,14 +108,22 @@ height: 30px;
 }
 .socialMediaIcons {
 padding: 15px 0;
+display: flex
 }
 
 .socialMediaIcons :nth-child(n) {
   border-radius: 15px;
   width: 35px;
+  height: 35px;
   padding-right: 10px;
 }
-
+.socialMediaIcons :nth-child(n) img {
+  border-radius: 15px;
+  width: 35px;
+  height: 35px;
+  padding-right: 10px;
+  background-color: yellow;
+}
 
 
 
@@ -251,7 +259,6 @@ padding: 15px 0;
 
   .footer > :nth-child(2) p {
     width: 100vw;
-
   }
 
 }

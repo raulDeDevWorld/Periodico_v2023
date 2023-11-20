@@ -35,42 +35,52 @@ export default function Section({ topic, publicView, color }) {
         removeData(item.route, setUserData, setUserSuccess)
         setModal('')
     }
-    function delet(i) {
+    function delet(i, path) {
         console.log(topic)
-        setItem({ ...i, route: `${topic}/Modals/${i.uuid}` })
+        setItem({ ...i, route: `${topic}/${path}/${i.uuid}` })
         setModal('DELETE')
     }
-
+console.log(item)
     return (
         <div className='w-full bg-sky-100'>
             {modal === 'DELETE' && <Modal2 theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas seguro de eliminar la publicidad que selecionaste</Modal2>}
 
             {userDB[topic] !== null && publicView == false && <Form topic={topic} value={userDB[`${topic}-${date}`]} color={color}></Form>}
 
-            {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol === 'admin' && publicView == false && viewPeriodista == false &&
+            { user && userDB && userDB.users && userDB.users[user.uid] !== undefined && userDB.users[user.uid] && userDB.users[user.uid].rol === 'admin' && publicView == false && viewPeriodista == false &&
                 <>
-                    <div className='grid grid-cols-3 gap-2'>
+                     <div className={`grid ${topic !== 'Inicio' ? 'grid-cols-3' : 'grid-cols-2'} gap-2`}>
                         <Tag theme={tag === 'Banners' ? 'Primary' : 'Transparent'} click={() => handlerTag('Banners')}>Banners</Tag>
                         <Tag theme={tag === 'Modals' ? 'Primary' : 'Transparent'} click={() => handlerTag('Modals')}>Modals</Tag>
-                        <Tag theme={tag === 'Notas' ? 'Primary' : 'Transparent'} click={() => handlerTag('Notas')}>Notas</Tag>
+                       { topic !== 'Inicio' && <Tag theme={tag === 'Notas' ? 'Primary' : 'Transparent'} click={() => handlerTag('Notas')}>Notas</Tag>}
                     </div>
                     <div className={`${style.formInputsAdmin} ${style.formInputs}`}>
                         {tag === 'Banners' && <>
                             <FormAddsC ruteDB={`/${topic}/BannerTop`} ruteSTG='Banners' id={`/${topic}/BannerTop`} title='Añadir Banner Cabecera' />
                             <FormAddsC ruteDB={`/${topic}/BannerBottom`} ruteSTG='Banners' id={`/${topic}/BannerBottom`} title='Añadir Banner Pie' />
                         </>}
-                        {tag === 'Modals' && <FormAddsC ruteDB={`/${topic}/Modals`} ruteSTG='Modals' id={`/${topic}/Modals`} title='Añadir Modal' />}
-                        {tag === 'Notas' && <FormAddsC ruteDB={`/${topic}/Notas`} ruteSTG='Notas' id={`/${topic}/Notas`} title='Añadir banner notas' />}
+                        { tag === 'Modals' && <FormAddsC ruteDB={`/${topic}/Modals`} ruteSTG='Modals' id={`/${topic}/Modals`} title='Añadir Modal' />}
+                        {topic !== 'Inicio' && tag === 'Notas' && <FormAddsC ruteDB={`/${topic}/Notas`} ruteSTG='Notas' id={`/${topic}/Notas`} title='Añadir banner notas' />}
                     </div>
                 </>
             }
 
             {tag === 'Modals' && <div className="columns-3 gap-3 pb-3">
-                {userDB && userDB[topic] && userDB[topic]['Modals'] && Object.values(userDB[topic]['Modals']).map((i) => {
-                    return <div className='inline-block relative'>
+                {userDB && userDB[topic] && userDB[topic]['Modals'] && Object.values(userDB[topic]['Modals']).map((i, index) => {
+                    return <div className='inline-block relative' key={index}>
                         <img src={i.url} className={`${'w-full gap-5 rounded-[15px] mb-3.5'} transition-all`} style={{ zIndex: '1000000000' }} onClick={() => handlerZoom(i)} alt="" />
                         <div className='w-full absolute bottom-[20px] px-5 z-50'>
-                            <Button theme='MiniDanger' click={() => delet(i)}>Eliminar</Button>
+                            <Button theme='MiniDanger' click={() => delet(i, 'Modals')}>Eliminar</Button>
+                        </div>
+                    </div>
+                })}
+            </div>}
+            {tag === 'Notas' && <div className="columns-3 gap-3 pb-3">
+                {userDB && userDB[topic] && userDB[topic]['Notas'] && Object.values(userDB[topic]['Notas']).map((i, index) => {
+                    return <div className='inline-block relative' key={index}>
+                        <img src={i.url} className={`${'w-full gap-5 rounded-[15px] mb-3.5'} transition-all`} style={{ zIndex: '1000000000' }} alt="" />
+                        <div className='w-full absolute bottom-[20px] px-5 z-50'>
+                            <Button theme='MiniDanger' click={() => delet(i, 'Notas')}>Eliminar</Button>
                         </div>
                     </div>
                 })}

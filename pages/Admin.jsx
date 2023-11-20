@@ -75,7 +75,6 @@ function Admin() {
   //   })
 
 
-console.log(userDB)
   useEffect(() => {
 
     if (userDB.users && userDB.users[user.uid] == undefined) {
@@ -103,6 +102,7 @@ console.log(userDB)
           <span className='block w-full h-[3px] absolute bottom-[-7px] left-0 bg-[brown]'></span>
         </div>
         <Header></Header>
+        
         <Section topic="Inicio" publicView={false} color='#8FC2C9'></Section>
         <Section topic="Sociedad" publicView={false} color='#c98f8f'></Section>
         <Section topic="Salud" publicView={false} color='#8FC2C9'></Section>

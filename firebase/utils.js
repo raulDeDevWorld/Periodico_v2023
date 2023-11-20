@@ -251,6 +251,23 @@ async function getIndexData(setUserData, date, minDate, setUserSuccess) {
         }
       })
   })    ;
+  arr.map((i) => {
+    get(query(ref(db, `${i}/Notas`)))
+      .then(async (snapshot) => {
+
+        if (snapshot.exists()) {
+          let snapTempVal = snapshot.val()
+
+          allData = {
+            ...allData, [i]: {
+              ...allData[i],
+              Notas: snapTempVal
+            }
+          }
+          setUserData(allData)
+        }
+      })
+  })    ;
 }
 
 

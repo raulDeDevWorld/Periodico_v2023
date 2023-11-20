@@ -172,7 +172,17 @@ position: absolute;
 z-index: 10000;
 }
 
-
+.containerLogout {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(to right, #00353d,#00353d, #007483,#00353d, #00353d)  ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-bottom: 5px solid white;
+}
 
 
 @media (max-width: 850px) {

@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Navbar from '../components/Navbar'
+import NavbarSimple from '../components/NavbarSimple'
+
 import { useUser } from '../context/Context.js'
 import { WithoutAuth } from '../HOCs/WithoutAuth'
 import Button from '../components/Button'
@@ -67,6 +69,14 @@ function Layout({ children }) {
             </div>
             <main className={styles.main}>
                 {children}
+
+
+
+
+
+
+
+                <NavbarSimple footer='layout'></NavbarSimple>
 
                 <footer className={styles.footer} id="Nosotros">
                     <div>

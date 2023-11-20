@@ -233,7 +233,7 @@ console.log(validate())
 
       {specificData && <main className={styles.main}>
         <div>
-          <NavbarSimple></NavbarSimple>
+          <NavbarSimple footer={false}></NavbarSimple>
         </div>
 
         {/* view */}

@@ -91,6 +91,7 @@ export default function Header(props) {
         <>
 
             {router.pathname == "/Admin" && <FormAdds />}
+
             <header className={styles.header}>
                 <div className={styles.fecha}>
                     <Dates></Dates>
