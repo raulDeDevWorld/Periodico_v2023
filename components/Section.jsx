@@ -1,31 +1,52 @@
 import { useUser } from '../context/Context'
 import Template from './Template'
+import Button from './Button'
 import styles from '../styles/Template.module.css'
 import { useState, useEffect } from 'react'
 import Tag from '../components/Tag'
 import style from '../styles/Form.module.css'
-
+import { removeData } from '../firebase/utils'
 import Form from './Form'
 import FormAddsC from './FormAddsC'
 
 import { getDate, getDayMonthYear } from "../utils/Utils";
 
+import Modal2 from './Modal2'
 
 export default function Section({ topic, publicView, color }) {
 
-    const { user, userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date, monthAndYear, dayMonthYear, viewPeriodista } = useUser()
+    const { user, userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date, monthAndYear, dayMonthYear, viewPeriodista, item, setItem, modal, setModal } = useUser()
     const [tag, setTag] = useState('Banners')
+    const [zoomIMG, setZoomIMG] = useState('')
+    const [modalsInterval, setModalsInterval] = useState(false)
+    const [counterModals, setCounterModals] = useState(0)
 
     function handlerTag(val) {
         tag === val ? setTag('') : setTag(val)
     }
-    { console.log(userDB && userDB[topic] && userDB[topic]) }
 
-    //console.log(postsIMG)
+    function handlerZoom(i) {
+        setZoomIMG(i.url)
+    }
+    function closeZoom() {
+        setZoomIMG('')
+    }
+    function deletConfirm() {
+        removeData(item.route, setUserData, setUserSuccess)
+        setModal('')
+    }
+    function delet(i) {
+        console.log(topic)
+        setItem({ ...i, route: `${topic}/Modals/${i.uuid}` })
+        setModal('DELETE')
+    }
+
     return (
-        <div className='bg-sky-100'>
+        <div className='w-full bg-sky-100'>
+            {modal === 'DELETE' && <Modal2 theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas seguro de eliminar la publicidad que selecionaste</Modal2>}
+
             {userDB[topic] !== null && publicView == false && <Form topic={topic} value={userDB[`${topic}-${date}`]} color={color}></Form>}
-            
+
             {userDB && userDB.users && userDB.users[user.uid] && userDB.users[user.uid].rol === 'admin' && publicView == false && viewPeriodista == false &&
                 <>
                     <div className='grid grid-cols-3 gap-2'>
@@ -39,22 +60,42 @@ export default function Section({ topic, publicView, color }) {
                             <FormAddsC ruteDB={`/${topic}/BannerBottom`} ruteSTG='Banners' id={`/${topic}/BannerBottom`} title='Añadir Banner Pie' />
                         </>}
                         {tag === 'Modals' && <FormAddsC ruteDB={`/${topic}/Modals`} ruteSTG='Modals' id={`/${topic}/Modals`} title='Añadir Modal' />}
-                        {tag === 'Notas' && <FormAddsC ruteDB={`/${topic}/Notas`} ruteSTG='Notas' id={`/${topic}/Notas`} title='Añadir publicidad' />}
+                        {tag === 'Notas' && <FormAddsC ruteDB={`/${topic}/Notas`} ruteSTG='Notas' id={`/${topic}/Notas`} title='Añadir banner notas' />}
                     </div>
                 </>
             }
 
-            <div className="columns-3xs">
-                {userDB && userDB[topic] && userDB[topic]['Modals'] && Object.values(userDB[topic]['Modals']).map((i) => console.log(i))}
-            </div>
+            {tag === 'Modals' && <div className="columns-3 gap-3 pb-3">
+                {userDB && userDB[topic] && userDB[topic]['Modals'] && Object.values(userDB[topic]['Modals']).map((i) => {
+                    return <div className='inline-block relative'>
+                        <img src={i.url} className={`${'w-full gap-5 rounded-[15px] mb-3.5'} transition-all`} style={{ zIndex: '1000000000' }} onClick={() => handlerZoom(i)} alt="" />
+                        <div className='w-full absolute bottom-[20px] px-5 z-50'>
+                            <Button theme='MiniDanger' click={() => delet(i)}>Eliminar</Button>
+                        </div>
+                    </div>
+                })}
+            </div>}
 
-            {userDB && userDB[topic] && userDB[topic]['Templates'] &&
+            {userDB && userDB[topic] && userDB[topic]['Templates'] && tag === 'Banners' &&
                 <Template
                     topic={topic}
                     color={color}
                     grid={userDB[topic]['Templates'][userDB[topic]['Templates'][dayMonthYear] ? dayMonthYear : getDayMonthYear()]} />
             }
+            {zoomIMG !== '' && <div className='fixed flex justify-center items-center top-0 left-0 h-[100vh] w-[100vw] bg-[#000000c7] z-[1000000000]' onClick={closeZoom}>
+                <div className='inline-block relative'>
+                    <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-[#000000c7] hover:bg-gray-200 hover:text-gray-900 rounded-lg text-[14px] w-8 h-8 ml-auto inline-flex justify-center items-center z-50" onClick={closeZoom}>
+                        <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span className="sr-only">Close modal</span>
+                    </button>
+                    <img src={zoomIMG} className={`landscape:h-[80vh] portrait:w-[70vw] rounded-[20px]`} onClick={handlerZoom} alt="" />
+                </div>
+            </div>}
+
         </div>
+
     )
 }
 

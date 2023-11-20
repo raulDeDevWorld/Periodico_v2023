@@ -18,6 +18,9 @@ export function UserProvider ({ children }) {
 	const [success, setSuccess] = useState(null)
 	const [viewPeriodista, setViewPeriodista] = useState(false)
 
+	const [item, setItem] = useState(undefined)
+	const [modal, setModal] = useState('')
+
 	function setUserProfile (userProfile) {
 		setUser(userProfile)
 	}
@@ -58,6 +61,7 @@ export function UserProvider ({ children }) {
 	function setUserViewPeriodista (mode) {
 		setViewPeriodista(mode)
 	}
+	
 	const value = useMemo(()=>{
 		return ({
 			user,
@@ -73,6 +77,12 @@ export function UserProvider ({ children }) {
 			dayMonthYear,
 			success,
 			viewPeriodista,
+
+			item,
+			modal, 
+			setModal, 
+			setItem,
+
 			setUserProfile,
 			setUserData,
 			setUserPdfData,
@@ -87,7 +97,7 @@ export function UserProvider ({ children }) {
 			setUserSuccess,
 			setUserViewPeriodista,
 		})
-	}, [ user, userDB, pdfData, success, specificData, specificDataEditable, postsIMG, showImg, showVideo, date, monthAndYear, dayMonthYear, viewPeriodista])
+	}, [ user, userDB, pdfData, success, specificData, specificDataEditable, postsIMG, showImg, showVideo, date, monthAndYear, dayMonthYear, viewPeriodista, item, modal])
 
 	return (
 		<UserContext.Provider value={value} >

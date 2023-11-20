@@ -75,7 +75,7 @@ function Admin() {
   //   })
 
 
-
+console.log(userDB)
   useEffect(() => {
 
     if (userDB.users && userDB.users[user.uid] == undefined) {

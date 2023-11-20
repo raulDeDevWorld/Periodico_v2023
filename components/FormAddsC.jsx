@@ -55,7 +55,7 @@ export default function Form({ id, ruteDB, ruteSTG, title, i, carpeta, dataDB, d
             if (data[`${id}-dateInit`] && data[`${id}-dateFinish`]) {
 
                 const key = newDate.getTime()
-                const object = { [key]: { whatsapp: data[`${id}-whatsapp`] ? data[`${id}-whatsapp`] : '', enlace: data[`${id}-enlace`] ? data[`${id}-enlace`] : '', dateInit: data[`${id}-dateInit`], dateFinish: data[`${id}-dateFinish`] } }
+                const object = { [key]: {uuid: key, whatsapp: data[`${id}-whatsapp`] ? data[`${id}-whatsapp`] : '', enlace: data[`${id}-enlace`] ? data[`${id}-enlace`] : '', dateInit: data[`${id}-dateInit`], dateFinish: data[`${id}-dateFinish`] } }
                 writeUserData(ruteDB, object, setUserSuccess, setUserData)
                 localFile && uploadIMG(ruteDB, ruteSTG, key, localFile, setUserSuccess, monthYear, isCheckedComp)
             } else {

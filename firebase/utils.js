@@ -233,7 +233,24 @@ async function getIndexData(setUserData, date, minDate, setUserSuccess) {
       })
   })    ;
 
+  arr.map((i) => {
+    get(query(ref(db, `${i}/Modals`)))
+      .then(async (snapshot) => {
 
+        if (snapshot.exists()) {
+          let snapTempVal = snapshot.val()
+
+          allData = {
+            ...allData, [i]: {
+              ...allData[i],
+              Modals: snapTempVal
+            }
+
+          }
+          setUserData(allData)
+        }
+      })
+  })    ;
 }
 
 
@@ -269,7 +286,10 @@ function removeData(ruteDB, setUserData, setUserSuccess) {
       getIndexData(setUserData)
       setUserSuccess('save')
     })
-    .catch(() => setUserSuccess('repeat'));
+    .catch((err) =>{ 
+      console.log(err)
+      setUserSuccess('repeat')
+    });
 }
 export { app, onAuth, signUpWithEmail, signInWithEmail, handleSignOut, getIndexData, getSpecificData, writeUserData, removeData, }
 

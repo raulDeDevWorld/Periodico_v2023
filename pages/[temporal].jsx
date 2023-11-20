@@ -55,6 +55,9 @@ function TemplateOne() {
   const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
   const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 
+  const [zoomIMG, setZoomIMG] = useState('')
+  const [modalsInterval, setModalsInterval] = useState(false)
+  const [counterModals, setCounterModals] = useState(0)
 
   const router = useRouter()
 
@@ -175,14 +178,54 @@ function TemplateOne() {
     specificData && specificData[`PostImage_${router.query.temporal}`] && specificData[`PostImage_${router.query.temporal}`].nota
       ? setTextEditor(specificData[`PostImage_${router.query.temporal}`].nota)
       : setTextEditor('En redacción ')
-
-  
-
-
-   
-
-
   }, [userDB, specificData, router.query.temporal,]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function handlerZoom(i) {
+    setZoomIMG(i.url)
+}
+
+  function closeZoom() {
+    console.log(userDB[validate()]['Modals'] && Object.values(userDB[validate()]['Modals']).length === counterModals + 1)
+    // userDB[validate()]['Modals'] && Object.values(userDB[validate()]['Modals']).length < counterModals + 1
+    //     ? setCounterModals(0)
+    //     : setCounterModals(counterModals + 1)
+    setZoomIMG('')
+    userDB && userDB[validate()] && userDB[validate()]['Modals'] && Object.values(userDB[validate()]['Modals']).length > 0 && setUserModalsInterval(5000)
+}
+
+  const setUserModalsInterval = (time) => {
+    console.log('interval')
+    const interval = setTimeout(() => {
+        Object.values(userDB[validate()]['Modals'])[counterModals + 1] && setZoomIMG(Object.values(userDB[validate()]['Modals'])[getRandomInt(userDB[validate()]['Modals'] && Object.values(userDB[validate()]['Modals']).length)].url)
+    }, time)
+
+    return () => {
+        clearTimeout(interval)
+    }
+}
+console.log(userDB && userDB[validate()] && userDB[validate()]['Modals'])
+console.log(validate())
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+  useEffect(() => {
+    userDB && userDB[validate()] && userDB[validate()]['Modals'] && Object.values(userDB[validate()]['Modals']).length > 0 && setUserModalsInterval(5000)
+}, [userDB]);
 
   return (
 
@@ -299,6 +342,22 @@ function TemplateOne() {
       {dataEditor && <Modal carpeta={dataEditor.carpeta} item={dataEditor.item} i={dataEditor.i} close={handlerClickEnlace}></Modal>}
 
       {success == "save" && <Success>Cargando...</Success>}
+
+
+
+      {zoomIMG !== '' && <div className='fixed flex justify-center items-center top-0 left-0 h-[100vh] w-[100vw] bg-[#000000c7] z-[1000000000]' onClick={closeZoom}>
+                <div className='inline-block relative'>
+                    <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-[#000000c7] hover:bg-gray-200 hover:text-gray-900 rounded-lg text-[14px] w-8 h-8 ml-auto inline-flex justify-center items-center z-50" onClick={closeZoom}>
+                        <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span className="sr-only">Close modal</span>
+                    </button>
+                    <img src={zoomIMG} className={`landscape:h-[80vh] portrait:w-[70vw] rounded-[20px]`} onClick={handlerZoom} alt="" />
+                </div>
+            </div>}
+
+
 
     </Layout>
   )
