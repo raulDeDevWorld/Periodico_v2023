@@ -30,7 +30,6 @@ function TemplateFour({ color, topic, grid }) {
         router.pathname != "/Admin" && router.push("/" + userDB[topic]["Posts"][`PostImage_${i}`])
         router.pathname == "/Admin" && setDataEditor(i)
     }
-
     // console.log(userDB)
     useEffect(() => {
         userDB[topic] && userDB[topic]["Posts"] && setDataForDate(Object.keys(userDB[topic]["Posts"]).map(i => { const newI = i.split('_'); return newI[1] }).sort((a, b) => b - a))

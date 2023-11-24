@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from 'react'
 
 import style from '../styles/Navbar.module.css'
 
-export default function Navbar({footer}) {
+export default function Navbar({ footer }) {
     const { pathname } = useRouter()
     const router = useRouter()
 
@@ -22,36 +22,37 @@ export default function Navbar({footer}) {
 
 
     const controlNavbar = () => {
-        if (typeof window !== 'undefined') { 
-          if (window.scrollY > lastScrollY) { 
-            setShow(false); 
-          } else { 
-            setShow(true);  
-          }
-            setLastScrollY(window.scrollY); 
-        }
-      };
-    
-      useEffect(() => {
         if (typeof window !== 'undefined') {
-          window.addEventListener('scroll', controlNavbar);
-  
-          return () => {
-            window.removeEventListener('scroll', controlNavbar);
-          };
+            if (window.scrollY > lastScrollY) {
+                setShow(false);
+            } else {
+                setShow(true);
+            }
+            setLastScrollY(window.scrollY);
         }
-      }, [lastScrollY]);
+    };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.addEventListener('scroll', controlNavbar);
+
+            return () => {
+                window.removeEventListener('scroll', controlNavbar);
+            };
+        }
+    }, [lastScrollY]);
 
     return (
         <>
-            {footer !== 'layout' && <div className={`${style.containerLogout}`}>
-                <span className='w-[35px] h-[35px] flex justify-center items-center bg-white rounded'><img src={'/hoy.png'} className="h-[30px] cursor-pointer" onClick={()=>router.push('/')} alt="" /></span>
-                {/* <span className='block w-full h-[3px] absolute bottom-[-7px] left-0 bg-[brown]'></span> */}
-            </div>}
             <div className={style.socialMedia} style={{ height: 'auto' }}>
 
                 <div className={style.container}>
-                    <nav className={style.nav}>
+                    <nav className={`${style.nav} px-[50px]`} style={{padding: '0 70px'}}>
+                        <Link href="/" legacyBehavior scroll={false}>
+                            <a className={` absolute h-[34px] top-0 bottom-0 my-auto left-[5px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
+                                <span className='w-[34px] h-[34px] flex justify-center items-center bg-white rounded'><img src={'/hoy.png'} className="block h-[30px] cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
+                            </a>
+                        </Link>
                         <Link href="/#Sociedad" legacyBehavior scroll={false}>
                             <a className={`${style.link} ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>SOCIEDAD</a>
                         </Link>
@@ -91,8 +92,13 @@ export default function Navbar({footer}) {
                         <Link href="/#Nosotros" legacyBehavior scroll={false}>
                             <a className={`${style.link} ${pathname == "#Nosotros" ? style.active : ''}`} onClick={handleClick}>NOSOTROS</a>
                         </Link>
+                        <Link href="/" legacyBehavior scroll={false}>
+                            <a className={`${style.link} absolute top-0 right-[5px] ${pathname == "#Sociedad" ? style.active : ''}`} onClick={handlerClick}>
+                                <span className=' w-[30px] h-[30px] flex justify-center items-center bg-white rounded my-auto '><img src={'/hoy.png'} className="block h-[30px] cursor-pointer" onClick={() => router.push('/')} alt="" /></span>
+                            </a>
+                        </Link>
                     </nav>
-                    {footer  !== 'layout' && <div className={style.containerSocialMediaIcons}>
+                    {footer !== 'layout' && <div className={style.containerSocialMediaIcons}>
                         <div className={style.socialMediaIcons} >
 
                             <Link href="https://api.whatsapp.com/send?phone=+59161116665&text=Hola%20Periódico%20HOY%20%20quiero%20contactarme%20con%20un%20agente%20de%20ventas..." legacyBehavior scroll={false}>

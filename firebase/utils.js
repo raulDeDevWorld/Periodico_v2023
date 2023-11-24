@@ -252,7 +252,7 @@ async function getIndexData(setUserData, date, minDate, setUserSuccess) {
       })
   })    ;
   arr.map((i) => {
-    get(query(ref(db, `${i}/Notas`)))
+    get(query(ref(db, `${i}/BannerNotas1`)))
       .then(async (snapshot) => {
 
         if (snapshot.exists()) {
@@ -261,13 +261,66 @@ async function getIndexData(setUserData, date, minDate, setUserSuccess) {
           allData = {
             ...allData, [i]: {
               ...allData[i],
-              Notas: snapTempVal
+              BannerNotas1: snapTempVal
             }
           }
           setUserData(allData)
         }
       })
-  })    ;
+  });
+  arr.map((i) => {
+    get(query(ref(db, `${i}/BannerNotas2`)))
+      .then(async (snapshot) => {
+
+        if (snapshot.exists()) {
+          let snapTempVal = snapshot.val()
+
+          allData = {
+            ...allData, [i]: {
+              ...allData[i],
+              BannerNotas2: snapTempVal
+            }
+          }
+          setUserData(allData)
+        }
+      })
+  });
+  arr.map((i) => {
+    get(query(ref(db, `${i}/BannerNotas3`)))
+      .then(async (snapshot) => {
+
+        if (snapshot.exists()) {
+          let snapTempVal = snapshot.val()
+
+          allData = {
+            ...allData, [i]: {
+              ...allData[i],
+              BannerNotas3: snapTempVal
+            }
+          }
+          setUserData(allData)
+        }
+      })
+  });
+  arr.map((i) => {
+    get(query(ref(db, `${i}/BannerNotas4`)))
+      .then(async (snapshot) => {
+
+        if (snapshot.exists()) {
+          let snapTempVal = snapshot.val()
+
+          allData = {
+            ...allData, [i]: {
+              ...allData[i],
+              BannerNotas4: snapTempVal
+            }
+          }
+          setUserData(allData)
+        }
+      })
+  });
+
+
 }
 
 

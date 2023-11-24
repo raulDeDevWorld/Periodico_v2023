@@ -74,9 +74,12 @@ function Layout({ children }) {
 
 
 
+                <div className='relative border-t-[50px] h-[50px]  w-full border-white'>
+                                    <NavbarSimple footer='layout'></NavbarSimple>
+
+                </div>
 
 
-                <NavbarSimple footer='layout'></NavbarSimple>
 
                 <footer className={styles.footer} id="Nosotros">
                     <div>
@@ -106,24 +109,24 @@ function Layout({ children }) {
                     </div>
                     <div>
                         <h5>DIRECCIÓN</h5>
-                        <div className={styles.socialMediaIcons}>
+                        <div className='flex items-center h-[50px] '>
                             <Link href="https://www.facebook.com/periodicohoybolivia0" legacyBehavior scroll={false}>
-                                <a onClick={handlerClick} target="_blank"><img src="/SocialMedia/FACEBOOK-01.svg" alt="SocialMedia" /></a>
+                                <a onClick={handlerClick} target="_blank"><img src="/SocialMedia/FACEBOOK-01.svg" className='h-[30px] w-[30px]' alt="SocialMedia" /></a>
                             </Link>
                             <Link href="https://www.instagram.com/periodicohoybolivia/" legacyBehavior scroll={false}>
-                                <a onClick={handlerClick} target="_blank"><img src="/SocialMedia/INSTAGRAM-02.svg" alt="SocialMedia" /></a>
+                                <a onClick={handlerClick} target="_blank"><img src="/SocialMedia/INSTAGRAM-02.svg" className='h-[30px] w-[30px]' alt="SocialMedia" /></a>
                             </Link>
                             <Link href="https://twitter.com/_HOYBolivia" legacyBehavior scroll={false}>
-                                <a onClick={handlerClick} target="_blank"> <img src="/SocialMedia/TWITTER-03.svg" alt="SocialMedia" /></a>
+                                <a onClick={handlerClick} target="_blank"> <img src="/SocialMedia/TWITTER-03.svg" className='h-[30px] w-[30px]' alt="SocialMedia" /></a>
                             </Link>
                             <Link href="https://www.youtube.com/channel/UCXFA6pzESb1NQMsepmhC6Vw" legacyBehavior scroll={false}>
-                                <a onClick={handlerClick} target="_blank"> <img src="/SocialMedia/YOUTUBE-04.svg" alt="SocialMedia" /></a>
+                                <a onClick={handlerClick} target="_blank"> <img src="/SocialMedia/YOUTUBE-04.svg" className='h-[30px] w-[30px]' alt="SocialMedia" /></a>
                             </Link>
                             <Link href="https://www.tiktok.com/@periodicohoybolivia" legacyBehavior scroll={false}>
-                                <a onClick={handlerClick} target="_blank"> <img src="/SocialMedia/tIK tOK-05.svg" alt="SocialMedia" /></a>
+                                <a onClick={handlerClick} target="_blank"> <img src="/SocialMedia/tIK tOK-05.svg" className='h-[30px] w-[30px]' alt="SocialMedia" /></a>
                             </Link>
                             <Link href={`https://api.whatsapp.com/send?phone=+59161116665&text=Hola%20Periódico%20HOY%20%20quiero%20contactarme%20con%20un%20agente%20de%20ventas...`} legacyBehavior scroll={false}>
-                                <a onClick={handlerClick} target="_blank"> <img src="/SocialMedia/WHATSAPP-06.svg" alt="SocialMedia" /></a>
+                                <a onClick={handlerClick} target="_blank"> <img src="/SocialMedia/WHATSAPP-06.svg" className='h-[30px] w-[30px]' alt="SocialMedia" /></a>
                             </Link>
                         </div>
 

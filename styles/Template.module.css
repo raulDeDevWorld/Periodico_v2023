@@ -150,7 +150,7 @@
     border: none;
     color: #ffffff;
     border-radius: 3px;
-    z-index: 100000;
+    z-index: 40;
     font-size: 12px;
 }
 
@@ -375,7 +375,7 @@ background-color: red;
     position: absolute;
     right: 0;
     background-color: rgba(0, 0, 0, 0.727);
-    z-index: 1000;
+    z-index: 40;
     color: beige;
 }
 

@@ -2,6 +2,7 @@ import { writeUserData, getData } from '../firebase/utils'
 import { uploadIMG } from '../firebase/storage'
 import { useUser } from '../context/Context.js'
 import Button from './Button'
+import Select from './Select'
 import FormAddsC from './FormAddsC'
 import style from '../styles/Form.module.css'
 import { useState } from 'react'
@@ -11,9 +12,13 @@ import imageCompression from 'browser-image-compression';
 
 export default function Form() {
 
-  const [check, setCheck] = useState('BP1')
+  const [check, setCheck] = useState(null)
 
-  const items = [
+  const bannerIzquierdo = [
+    {
+      id: null,
+      title: '------------'
+    },
     {
       id: 'BI1',
       ruteDB: 'BannerIzquierdo1',
@@ -37,6 +42,12 @@ export default function Form() {
       ruteDB: 'BannerIzquierdo4',
       ruteSTG: 'Banners',
       title: 'Ban. Izquierdo 4'
+    }
+  ]
+  const bannerPortada = [
+    {
+      id: null,
+      title: '------------'
     },
     {
       id: 'BP1',
@@ -57,91 +68,58 @@ export default function Form() {
       title: 'Ban. Portada 3'
     },
     {
-      id: 'BD1',
-      ruteDB: 'BannerDerecho1',
-      ruteSTG: 'Banners',
-      title: 'Ban. derecho 1'
-    },
-    {
-      id: 'BD2',
-      ruteDB: 'BannerDerecho2',
-      ruteSTG: 'Banners',
-      title: 'Ban. derecho 2'
-    },
-    {
-      id: 'BD3',
-      ruteDB: 'BannerDerecho3',
-      ruteSTG: 'Banners',
-      title: 'Ban. derecho 3'
-    },
-    {
-      id: 'BD4',
-      ruteDB: 'BannerDerecho4',
-      ruteSTG: 'Banners',
-      title: 'Ban. derecho 4'
-    },
-    {
       id: 'BP',
       ruteDB: 'BannerPortada',
       ruteSTG: 'Banners',
       title: 'Ban. Portada 4'
     },
+  ]
+  const bannerDerecho = [
     {
-      id: 'BN1',
-      ruteDB: 'BannerNotas1',
-      ruteSTG: 'Banners',
-      title: 'Ban. De Notas 1'
+      id: null,
+      title: '------------'
     },
     {
-      id: 'BN2',
-      ruteDB: 'BannerNotas2',
+      id: 'BD1',
+      ruteDB: 'BannerDerecho1',
       ruteSTG: 'Banners',
-      title: 'Ban. De Notas 2'
+      title: 'Ban. Derecho 1'
     },
     {
-      id: 'BN3',
-      ruteDB: 'BannerNotas3',
+      id: 'BD2',
+      ruteDB: 'BannerDerecho2',
       ruteSTG: 'Banners',
-      title: 'Ban. De Notas 3'
+      title: 'Ban. Derecho 2'
     },
     {
-      id: 'BN4',
-      ruteDB: 'BannerNotas4',
+      id: 'BD3',
+      ruteDB: 'BannerDerecho3',
       ruteSTG: 'Banners',
-      title: 'Ban. De Notas 4'
+      title: 'Ban. Derecho 3'
     },
+    {
+      id: 'BD4',
+      ruteDB: 'BannerDerecho4',
+      ruteSTG: 'Banners',
+      title: 'Ban. Derecho 4'
+    }
   ]
 
-
-  function handleCheck(e) {
-    const value = e.target.value
-    setCheck(value)
+  function handleCheck(i) {
+    console.log(i)
+    setCheck(i)
   }
   return (
-    <div className={`${style.form} bg-sky-100`}>
-      <form className={style.formChecks}>
-        {items.map((item, index) =>
-          <div key={index}>
-            <input
-              type="radio"
-              onChange={handleCheck}
-              value={item.id}
-              id={item.id}
-              checked={check == item.id ? true : false}
-            />
-            <label for={item.id}>{item.title}</label>
-          </div>
-        )}
+    <div className={`w-full `}>
+      <form className='grid grid-cols-3 gap-5'>
+        <Select arr={bannerIzquierdo} name='' defaultValue="Selecionar" focus={check && check.title.includes('Izquierdo')} click={handleCheck}></Select>
+        <Select arr={bannerPortada} name='' defaultValue="Selecionar" focus={check && check.title.includes('Portada')} click={handleCheck}></Select>
+        <Select arr={bannerDerecho} name='' defaultValue="Selecionar" focus={check && check.title.includes('Derecho')} click={handleCheck}></Select>
       </form>
-      
-      {items.map((item, index) =>
-        <div className={style.formInputs} key={index}>
-            {check == item.id && <FormAddsC ruteDB={item.ruteDB} ruteSTG={item.ruteSTG} id={item.id} title={item.title} />}
-        </div>
-      )}
+      <div className={style.formInputs}>
+        {check && check.id && <FormAddsC ruteDB={check.ruteDB} ruteSTG={check.ruteSTG} id={check.id} title={check.title} />}
+      </div>
     </div>
-
-
   )
 }
 

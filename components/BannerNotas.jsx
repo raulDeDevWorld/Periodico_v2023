@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 
-export default function Banner({ carpeta, items, click, admin }) {
+export default function Banner({ routeDB, items, click, admin }) {
 
     const { userDB, setUserData, setUserSuccess, success, postsIMG, setUserPostsIMG, date, monthAndYear } = useUser()
     // console.log(userDB[ruta])
@@ -28,32 +28,32 @@ export default function Banner({ carpeta, items, click, admin }) {
         console.log('redirect')
         rute !== '#' && window.open(rute, '_blank')
     }
-
-
+  
 
     return (
         <>
             {
                 items.map((item,) =>
-                    userDB[`${carpeta}${item}`] && postsIMG && <div className={`${styles.containerFadeRight} ${styles.containerFadeNota}`} >
-
+                userDB && userDB[`${routeDB}`] && userDB[`${routeDB}`] !== undefined && userDB[`${routeDB}`][`BannerNotas${item}`] && <div className={`${styles.containerFadeRight} ${styles.containerFadeNota}`} >
 
                         {
-                            Object.keys(userDB[`${carpeta}${item}`]).length == 1 ?
-                                Object.keys(userDB[`${carpeta}${item}`]).map((i, index) =>
+                            Object.keys(userDB[`${routeDB}`][`BannerNotas${item}`]).length == 1 ?
+                                Object.keys(userDB[`${routeDB}`][`BannerNotas${item}`]).map((i, index) =>
                                     <div className="each-slide" key={index} >
                                         <div className={styles.containerIframe}>
                                             {
                                                 admin ?
-                                                    <span onClick={() => click({ carpeta, item, i })}>
+                                                    <span onClick={() => click({ routeDB, item, i })}>
 
-                                                        {userDB[`${carpeta}${item}`][i].url
+                                                        {
+                                                        
+                                                        userDB[`${routeDB}`][`BannerNotas${item}`][i].url
                                                             ?
-                                                            <img className={styles.sliderIMG} src={userDB[`${carpeta}${item}`][i].url} />
+                                                            <img className={styles.sliderIMG} src={userDB[`${routeDB}`][`BannerNotas${item}`][i].url} />
                                                             :
                                                             <iframe
                                                                 className={styles.responsiveIframe}
-                                                                src={userDB[`${carpeta}${item}`][i].enlace.includes('https://www.youtube') ? userDB[`${carpeta}${item}`][i].enlace.replace('/watch?v=', '/embed/') + '?showinfo=0' : userDB[`${carpeta}${item}`][i].enlace}
+                                                                src={userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace.includes('https://www.youtube') ? userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace.replace('/watch?v=', '/embed/') + '?showinfo=0' : userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace}
                                                                 title="YouTube video player"
                                                                 frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -61,15 +61,15 @@ export default function Banner({ carpeta, items, click, admin }) {
                                                         }
 
                                                     </span>
-                                                    : <span onClick={() => redirect(userDB[`${carpeta}${item}`][i].enlace ? userDB[`${carpeta}${item}`][i].enlace : '#')}>
+                                                    : <span onClick={() => redirect(userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace ? userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace : '#')}>
 
-                                                        {userDB[`${carpeta}${item}`][i].url
+                                                        {userDB[`${routeDB}`][`BannerNotas${item}`][i].url
                                                             ?
-                                                            <img className={styles.sliderIMG} src={userDB[`${carpeta}${item}`][i].url} />
+                                                            <img className={styles.sliderIMG} src={userDB[`${routeDB}`][`BannerNotas${item}`][i].url} />
                                                             :
                                                             <iframe
                                                                 className={styles.responsiveIframe}
-                                                                src={userDB[`${carpeta}${item}`][i].enlace.includes('https://www.youtube') ? userDB[`${carpeta}${item}`][i].enlace.replace('/watch?v=', '/embed/') + '?showinfo=0' : userDB[`${carpeta}${item}`][i].enlace}
+                                                                src={userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace.includes('https://www.youtube') ? userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace.replace('/watch?v=', '/embed/') + '?showinfo=0' : userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace}
                                                                 title="YouTube video player"
                                                                 frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -84,13 +84,17 @@ export default function Banner({ carpeta, items, click, admin }) {
                                 :
                                 <Fade transitionDuration={8000} duration={10} scale={1}{...properties} indicators={true} easing='cubic'>
                                     {
-                                        Object.keys(userDB[`${carpeta}${item}`]).map((i, index) =>
+                                        Object.keys(userDB[`${routeDB}`][`BannerNotas${item}`]).map((i, index) =>
                                             <div className="each-slide" key={index} >
                                                 <div>
                                                     {
                                                         !admin ?
-                                                            <span onClick={() => click({ carpeta, item, i })}><img className={styles.sliderIMG} src={postsIMG[`Banners/${i}`]} /></span>
-                                                            : <span onClick={() => redirect(userDB[`${carpeta}${item}`][i].enlace ? userDB[`${carpeta}${item}`][i].enlace : '#')}><img className={styles.sliderIMG} src={postsIMG[`Banners/${i}`]} /></span>
+                                                            <span onClick={() => click({ routeDB, item, i })}>
+                                                                <img className={styles.sliderIMG} src={userDB[`${routeDB}`][`BannerNotas${item}`][i].url} />
+                                                                </span>
+                                                            : <span onClick={() => redirect(userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace ? userDB[`${routeDB}`][`BannerNotas${item}`][i].enlace : '#')}>
+                                                                <img className={styles.sliderIMG} src={userDB[`${routeDB}`][`BannerNotas${item}`][i].url} />
+                                                                </span>
                                                     }
                                                 </div>
                                             </div>

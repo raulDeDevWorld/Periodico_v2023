@@ -123,7 +123,7 @@ function TemplateOne() {
         return "Empresarial"
         break;
       default:
-        return ''
+        return 'anything'
     }
   }
 
@@ -217,8 +217,9 @@ function TemplateOne() {
         clearTimeout(interval)
     }
 }
-console.log(userDB && userDB[validate()] && userDB[validate()]['Modals'])
 console.log(validate())
+console.log(userDB)
+
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -231,7 +232,7 @@ console.log(validate())
 
     <Layout>
 
-      {specificData && <main className={styles.main}>
+      {specificData && router.query.temporal !== undefined && <main className={styles.main}>
         <div>
           <NavbarSimple footer={false}></NavbarSimple>
         </div>
@@ -267,7 +268,7 @@ console.log(validate())
 
               <div className={styles.redactorData}>
                 <div className={styles.perfil}>
-                  <img src={userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor !== undefined && userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor].url} className={styles.perfilIMG} alt="" />
+                  <img src={userDB[validate()] && userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor !== undefined && userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor].url} className={styles.perfilIMG} alt="" />
                   {userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor] && <p>{userDB.users[userDB[validate()].Posts[`PostImage_${router.query.temporal.slice(2)}`].redactor].name} <br /> Redactor</p>}
                 </div>
                 <span>
@@ -288,7 +289,7 @@ console.log(validate())
 
 
 
-          <BannerNotas carpeta="BannerNotas" items={[1, 2, 3, 4]} click={handlerClickEnlace} admin={formViewer}></BannerNotas>
+          <BannerNotas routeDB={`${validate()}`}  items={[1, 2, 3, 4]} click={handlerClickEnlace} admin={formViewer}></BannerNotas>
 
           {/* <img src="/publicidad.jpg" alt="" /> */}
         </div>
