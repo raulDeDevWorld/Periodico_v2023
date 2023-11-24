@@ -57,13 +57,15 @@ export default function Banner({ ruta, carpeta, click }) {
                                                         :
                                                         <>
                                                             <button className={styles.editButton}>Edit</button>
-                                                            <iframe
+                                                            {userDB[ruta][`${carpeta}`][i].enlace.includes('https://www.youtube') ? <iframe
                                                                 className={styles.responsiveIframe}
                                                                 src={userDB[ruta][`${carpeta}`][i].enlace.includes('https://www.youtube') ? userDB[ruta][`${carpeta}`][i].enlace.replace('/watch?v=', '/embed/') + '?showinfo=0' : userDB[ruta][`${carpeta}`][i].enlace}
                                                                 title="YouTube video player"
                                                                 frameborder="0"
                                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                                allowfullscreen></iframe>
+                                                                allowfullscreen></iframe>:
+                                                                <img className={styles.sliderIMG} src={userDB[ruta][`${carpeta}`][i].enlace} />
+                                                            }
                                                         </>
                                                     }
 

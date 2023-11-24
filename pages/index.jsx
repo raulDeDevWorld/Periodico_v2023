@@ -220,7 +220,9 @@ function Home() {
             <span className="sr-only">Close modal</span>
           </button>
           <img src={zoomIMG.url} className={`landscape:h-[80vh] portrait:w-[70vw] rounded-[20px]`} onClick={handlerZoom} alt="" />
-
+       {zoomIMG.whatsapp !== undefined && <Link href={`https://api.whatsapp.com/send?phone=${zoomIMG.whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
+            <a target="_blank"><span><img className={styles.sliderWhatsapp} src={`/SocialMedia/whatsapp.svg`} /></span></a>
+          </Link>}
           {/* {<Link href={`https://api.whatsapp.com/send?phone=${zoomIMG.whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
             <a target="_blank"><img className='block h-[50px] w-[50px]' src={zoomIMG.url} /></a>
           </Link>} */}
