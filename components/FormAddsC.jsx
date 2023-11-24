@@ -116,9 +116,9 @@ console.log(data)
                         <input type="checkbox" onClick={handlerCheckedComp} checked={isCheckedComp} /> Comp
                     </div>
 
-                    <input type="text" placeholder='Enlace' name={`${id}-enlace`} onChange={handlerEventChange} />
+                    <input type="text" placeholder='Enlace Youtube o IMG' name={`${id}-enlace`} onChange={handlerEventChange} />
+                    <input type="text" placeholder='Enalce redireccion' name={`${id}-redireccion`} onChange={handlerEventChange} />
                     <input type="text" placeholder='Whatsapp' name={`${id}-whatsapp`} onChange={handlerEventChange} />
-
                     <input className={style.calendario} type="date" id="start" name={`${id}-dateInit`} onChange={handlerEventChange} />
                     <p className={`${style.require} ${data[`${id}-dateInit`] ? style.green : ''}`}>{data[`${id}-dateInit`] ? 'Correcto' : '*Requerido'}</p>
 
