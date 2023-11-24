@@ -68,7 +68,7 @@ export default function Banner({ ruta, carpeta, click }) {
                                                     }
 
                                                 </span>
-                                                : <span onClick={() => redirect(userDB[ruta][`${carpeta}`][i].enlace ? userDB[ruta][`${carpeta}`][i].enlace : '#')}>
+                                                : <span onClick={() => redirect(userDB[ruta][`${carpeta}`][i].redireccion ? userDB[ruta][`${carpeta}`][i].redireccion : (userDB[ruta][`${carpeta}`][i].redireccion ? userDB[ruta][`${carpeta}`][i].redireccion: '#'))}>
 
                                                     {userDB[ruta][`${carpeta}`][i].url
                                                         ?
