@@ -73,7 +73,7 @@ function Home() {
     //     ? setCounterModals(0)
     //     : setCounterModals(counterModals + 1)
     setZoomIMG(undefined)
-    userDB && userDB['Inicio'] && userDB['Inicio']['Modals'] && Object.values(userDB['Inicio']['Modals']).length > 0 && setUserModalsInterval(10000)
+    userDB && userDB['Inicio'] && userDB['Inicio']['Modals'] && Object.values(userDB['Inicio']['Modals']).length > 0 && setUserModalsInterval(15000)
   }
 
   const setUserModalsInterval = (time) => {
@@ -100,7 +100,7 @@ function Home() {
 
 
   useEffect(() => {
-    userDB && userDB['Inicio'] && userDB['Inicio']['Modals'] && Object.values(userDB['Inicio']['Modals']).length > 0 && setUserModalsInterval(5000)
+    userDB && userDB['Inicio'] && userDB['Inicio']['Modals'] && Object.values(userDB['Inicio']['Modals']).length > 0 && setUserModalsInterval(3000)
   }, [userDB]);
 
 
@@ -221,9 +221,9 @@ function Home() {
           </button>
           <img src={zoomIMG.url} className={`landscape:h-[80vh] portrait:w-[70vw] rounded-[20px]`} onClick={handlerZoom} alt="" />
 
-          {<Link href={`https://api.whatsapp.com/send?phone=${zoomIMG.whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
+          {/* {<Link href={`https://api.whatsapp.com/send?phone=${zoomIMG.whatsapp}&text=Hola%20vi%20su%20anuncion%20en%20el%20PERIODICO%20HOY%20`} legacyBehavior>
             <a target="_blank"><img className='block h-[50px] w-[50px]' src={zoomIMG.url} /></a>
-          </Link>}
+          </Link>} */}
 
         </div>
       </div>}
