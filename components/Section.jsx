@@ -115,7 +115,7 @@ export default function Section({ topic, publicView, color }) {
     // console.log(userDB && userDB[topic] &&  userDB[topic] !== undefined && check !== undefined && userDB[topic][check.ruteDB])
 
     return (
-        <div className='w-full bg-sky-100'>
+        <div className='w-full bg-white'>
             {modal === 'DELETE' && <Modal2 theme="Danger" button="Eliminar" funcion={deletConfirm}>Estas seguro de eliminar la publicidad que selecionaste</Modal2>}
             {modal === 'EDIT' && dataEditor && <ModalForm>
                    { tag === 'Modals' && <FormAddsC ruteDB={`/${topic}/Modals`} ruteSTG={`/${topic}/Modals`} id='BM' title='Añadir Modal' dataDB={dataEditor} />}
@@ -135,8 +135,8 @@ export default function Section({ topic, publicView, color }) {
                     </div>
                     <div className={`${style.formInputsAdmin} ${style.formInputs}`}>
                         {tag === 'Banners' && <>
-                            <FormAddsC ruteDB={`/${topic}/BannerTop`} ruteSTG={`/${topic}/BannerTop`}  id={'BT'} title='Añadir Banner Cabecera' />
-                            <FormAddsC ruteDB={`/${topic}/BannerBottom`} ruteSTG={`/${topic}/BannerBottom`}id={'BB'} title='Añadir Banner Pie' />
+                            <FormAddsC ruteDB={`/${topic}/BannerTop`} ruteSTG={`/${topic}/BannerTop`}  id={'BTop'} title='Añadir Banner Cabecera' />
+                            <FormAddsC ruteDB={`/${topic}/BannerBottom`} ruteSTG={`/${topic}/BannerBottom`}id={'BBotom'} title='Añadir Banner Pie' />
                         </>}
                         {tag === 'Modals' && <FormAddsC ruteDB={`/${topic}/Modals`} ruteSTG={`/${topic}/Modals`} id='BM' title='Añadir Modal' />}
                         {topic !== 'Inicio' && tag.includes('Notas') && <FormAddsC ruteDB={`/${topic}/${check.ruteDB}`} ruteSTG={`/${topic}/${check.ruteDB}`} id={check.id} title={check.title} />}

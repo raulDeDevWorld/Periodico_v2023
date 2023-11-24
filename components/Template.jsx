@@ -36,7 +36,7 @@ function TemplateFour({ color, topic, grid }) {
     }, [userDB]);
     return (
 
-        <section className={styles.section} id={topic} style={{ backgroundColor: color }}>
+        <section className={styles.section} id={topic} style={{ backgroundColor: 'white' }}>
             {topic != "Inicio" && <div className={styles.containerSubtitle}><h4 className={styles.subtitle}>{topic == 'GestionDeGobierno' ? 'GESTIÓN DE GOBIERNO' : topic.toUpperCase()}</h4></div>}
 
             {userDB[topic]["BannerTop"] && <Banner ruta={topic} carpeta="BannerTop" click={handlerClickEnlace}></Banner>}
