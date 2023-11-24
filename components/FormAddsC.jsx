@@ -73,7 +73,7 @@ export default function Form({ id, ruteDB, ruteSTG, title, dataDB, close }) {
     }
 
 
-console.log(data)
+console.log(localFileURL)
     return (
 
         <>
