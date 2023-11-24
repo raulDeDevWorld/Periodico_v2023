@@ -136,7 +136,7 @@ export default function Section({ topic, publicView, color }) {
                     <div className={`${style.formInputsAdmin} ${style.formInputs}`}>
                         {tag === 'Banners' && <>
                             <FormAddsC ruteDB={`/${topic}/BannerTop`} ruteSTG={`/${topic}/BannerTop`}  id={'BT'} title='Añadir Banner Cabecera' />
-                            <FormAddsC ruteDB={`/${topic}/BannerBottom`} ruteSTG={`/${topic}/BannerBottom`}id='BB' title='Añadir Banner Pie' />
+                            <FormAddsC ruteDB={`/${topic}/BannerBottom`} ruteSTG={`/${topic}/BannerBottom`}id={'BB'} title='Añadir Banner Pie' />
                         </>}
                         {tag === 'Modals' && <FormAddsC ruteDB={`/${topic}/Modals`} ruteSTG={`/${topic}/Modals`} id='BM' title='Añadir Modal' />}
                         {topic !== 'Inicio' && tag.includes('Notas') && <FormAddsC ruteDB={`/${topic}/${check.ruteDB}`} ruteSTG={`/${topic}/${check.ruteDB}`} id={check.id} title={check.title} />}
